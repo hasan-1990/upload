@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Upload Vault</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  <div class="bg"></div>
+  <main class="shell">
+    <header class="hero">
+      <p class="kicker">تک‌صفحه · چندفرمت · لینک مستقیم</p>
+      <h1>Upload Vault</h1>
+      <p class="sub">فایل را بکش و رها کن، از دیسک انتخاب کن، یا از لینک دریافت کن. هر فایل یک آدرس دانلود اختصاصی می‌گیرد.</p>
+    </header>
+
+    <section class="grid">
+      <article class="card drop-card" id="dropzone">
+        <div class="drop-inner">
+          <div class="orb"></div>
+          <h2>آپلود فایل</h2>
+          <p>همه فرمت‌ها پذیرفته می‌شوند. چند فایل همزمان مجاز است.</p>
+          <label class="btn primary">
+            انتخاب فایل
+            <input id="fileInput" type="file" multiple hidden />
+          </label>
+        </div>
+      </article>
+
+      <article class="card">
+        <h2>دریافت از لینک</h2>
+        <p>آدرس مستقیم فایل را بگذار تا روی سرور ذخیره شود و لینک داخلی بسازد.</p>
+        <form id="urlForm" class="url-form">
+          <input id="urlInput" type="url" placeholder="https://example.com/file.zip" required />
+          <button class="btn primary" type="submit">دریافت</button>
+        </form>
+      </article>
+    </section>
+
+    <p id="status" class="status" hidden></p>
+    <div id="toast" class="toast" hidden>لینک کپی شد</div>
+    <div id="progressWrap" class="progress-panel" hidden>
+      <div class="progress-meta">
+        <span id="progressPct">۰٪</span>
+        <span id="progressSpeed">۰ KB/s</span>
+        <span id="progressBytes">۰ / ۰</span>
+      </div>
+      <div class="progress-wrap">
+        <div id="progressBar" class="progress-bar"></div>
+      </div>
+    </div>
+
+    <section class="list-wrap">
+      <div class="list-head">
+        <h2>فایل‌های آپلودشده</h2>
+        <span id="count" class="count">۰ مورد</span>
+      </div>
+      <div id="list" class="list"></div>
+    </section>
+  </main>
+
+  <div id="deleteModal" class="modal" hidden>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="deleteTitle">
+      <h3 id="deleteTitle">حذف فایل</h3>
+      <p>این فایل برای همیشه پاک می‌شود و لینک دانلود از کار می‌افتد.</p>
+      <p class="modal-file" id="deleteModalName"></p>
+      <div class="modal-actions">
+        <button type="button" class="btn ghost" id="deleteCancel">انصراف</button>
+        <button type="button" class="btn danger-solid" id="deleteConfirm">حذف شود</button>
+      </div>
+    </div>
+  </div>
+
+  <script>window.APP_BASE = {{ app_prefix|tojson }};</script>
+  <script src="{{ url_for('static', filename='app.js') }}?v=4"></script>
+</body>
+</html>

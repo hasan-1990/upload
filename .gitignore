@@ -1,0 +1,7 @@
+.env
+.venv/
+venv/
+__pycache__/
+uploads/
+data/index.json
+*.pyc
